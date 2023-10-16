@@ -149,4 +149,4 @@ const getPosts = function (n){
   return array;
 };
 
-const posts = getPosts(nPosts);
+getPosts(nPosts);
