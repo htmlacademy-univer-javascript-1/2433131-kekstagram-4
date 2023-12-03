@@ -1,4 +1,4 @@
-import {descriptions} from './constants.js';
+import {descriptions} from './data.js';
 
 const getArrayNoRepeat = function (min, max, flag){
   const array1 = [];

@@ -1,4 +1,4 @@
-import {messages, names} from './constants.js';
+import {messages, names} from './data.js';
 
 const getArrayWithRepeat = function (min, max, n, flag){
   const array = [];
