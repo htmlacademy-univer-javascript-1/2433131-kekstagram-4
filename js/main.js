@@ -1,5 +1,5 @@
-import {nPosts} from './constants.js';
+import {postsCount} from './data.js';
+import { renderGallery } from './gallery.js';
 import {getPosts} from './getPosts.js';
-import { renderPictures } from './picture.js';
 
-renderPictures(getPosts(nPosts));
+renderGallery(getPosts(postsCount));
