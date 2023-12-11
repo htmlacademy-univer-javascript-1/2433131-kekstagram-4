@@ -8,4 +8,4 @@ const hashtagLength = 20;
 const hashtagsCount = 5;
 const descriptionLength = 140;
 
-export {postsCount, descriptions, messages, names, hashtagLength, hashtagsCount, descriptionLength};
+export {postsCount, descriptions, commentsPerOne, messages, names, hashtagLength, hashtagsCount, descriptionLength};
