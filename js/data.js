@@ -8,4 +8,55 @@ const hashtagLength = 20;
 const hashtagsCount = 5;
 const descriptionLength = 140;
 
-export {postsCount, descriptions, commentsPerOne, messages, names, hashtagLength, hashtagsCount, descriptionLength};
+const effects = {
+  NONE: {
+    name: 'none',
+    style: 'none',
+    min: 0,
+    max: 100,
+    step: 1,
+    unit: '',
+  },
+  CHROME: {
+    name: 'chrome',
+    style: 'grayscale',
+    min: 0,
+    max: 1,
+    step: 0.1,
+    unit: '',
+  },
+  SEPIA: {
+    name: 'sepia',
+    style: 'sepia',
+    min: 0,
+    max: 1,
+    step: 0.1,
+    unit: '',
+  },
+  MARVIN: {
+    name: 'marvin',
+    style: 'invert',
+    min: 0,
+    max: 100,
+    step: 1,
+    unit: '%',
+  },
+  PHOBOS: {
+    name: 'phobos',
+    style: 'blur',
+    min: 0,
+    max: 3,
+    step: 0.1,
+    unit: 'px',
+  },
+  HEAT: {
+    name: 'heat',
+    style: 'brightness',
+    min: 1,
+    max: 3,
+    step: 0.1,
+    unit: '',
+  }
+};
+
+export {postsCount, descriptions, commentsPerOne, messages, names, hashtagLength, hashtagsCount, descriptionLength, effects};
