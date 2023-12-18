@@ -1,6 +1,5 @@
-import {messages, names} from './data.js';
-import {getArrayNoRepeat} from './getArrayNoRepeat.js';
-import {getArrayWithRepeat} from './getArrayWithRepeat.js';
+import { messages, names } from './data.js';
+import { getArrayNoRepeat, getArrayWithRepeat } from './util.js';
 
 const getCommentsArray = function(n){
   const comments = [];
@@ -49,4 +48,4 @@ const getPosts = function (postsCount){
   return posts;
 };
 
-export {getPosts};
+export { getPosts };
