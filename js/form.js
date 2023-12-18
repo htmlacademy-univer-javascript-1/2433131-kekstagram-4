@@ -20,6 +20,11 @@ const effectSliderWrapper = uploadForm.querySelector('.img-upload__effect-level'
 const effectSlider = uploadForm.querySelector('.effect-level__slider');
 const effectLevel = uploadForm.querySelector('.effect-level__value');
 
+// const SubmitButtonText = {
+//   IDLE: 'Опубликовать',
+//   SUBMITTING: 'Отправляю..',
+// };
+
 let effect = effects.NONE;
 
 noUiSlider.create(effectSlider, {
@@ -57,6 +62,33 @@ uploadFormInput.oninput = function() {
   hashtagsInput.addEventListener('input', setUploadButtonState);
 };
 
+
+const showSlider = () => {
+  effectSliderWrapper.classList.remove('hidden');
+};
+
+const hideSlider = () => {
+  effectSliderWrapper.classList.add('hidden');
+};
+
+const updateSliderSettings = () => {
+  effectSlider.noUiSlider.updateOptions(
+    {
+      range: {
+        min: effect.min,
+        max: effect.max
+      },
+      step: effect.step,
+      start: effect.max
+    });
+
+  if (effect === effects.NONE) {
+    hideSlider();
+  } else {
+    showSlider();
+  }
+};
+
 function closeUploadModal () {
   uploadFormOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
@@ -64,6 +96,8 @@ function closeUploadModal () {
 
   uploadForm.reset();
   pristine.reset();
+  effect = effects.NONE;
+  updateSliderSettings();
 
   document.removeEventListener('keydown', escapeEvent);
   desriptionInput.removeEventListener('input', setUploadButtonState);
@@ -114,32 +148,6 @@ buttonBigger.onclick = function () {
   imagePreview.style.transform = `scale(${scallerValue / 100})`;
 };
 
-const showSlider = () => {
-  effectSliderWrapper.classList.remove('hidden');
-};
-
-const hideSlider = () => {
-  effectSliderWrapper.classList.add('hidden');
-};
-
-const updateSliderSettings = () => {
-  effectSlider.noUiSlider.updateOptions(
-    {
-      range: {
-        min: effect.min,
-        max: effect.max
-      },
-      step: effect.step,
-      start: effect.max
-    });
-
-  if (effect === effects.NONE) {
-    hideSlider();
-  } else {
-    showSlider();
-  }
-};
-
 const onChangeEffect = (event) => {
   if (!event.target.classList.contains('effects__radio')) {
     return;
@@ -165,3 +173,33 @@ const onUpdateSlider = () => {
 
 effectsElement.addEventListener('change', onChangeEffect);
 effectSlider.noUiSlider.on('update', onUpdateSlider);
+
+uploadFormInput.addEventListener('change', (event) => {
+  const file = event.target.files[0];
+
+  if (file) {
+    const imageUrl = URL.createObjectURL(file);
+    imagePreview.src = imageUrl;
+  }
+});
+
+// const toggleSubmitButton = function (isDisabled) {
+//   uploadButton.disabled = isDisabled;
+//   uploadButton.textContent = isDisabled
+//     ? SubmitButtonText.SUBMITTING
+//     : SubmitButtonText.IDLE;
+// };
+
+const setOnFormSubmit = (callback) => {
+  uploadForm.addEventListener('submit', async (evt) => {
+    evt.preventDefault();
+
+    if (pristine.validate()) {
+      // toggleSubmitButton(true);
+      await callback(new FormData(uploadForm));
+      // toggleSubmitButton();
+    }
+  });
+};
+
+export { setOnFormSubmit, closeUploadModal };
