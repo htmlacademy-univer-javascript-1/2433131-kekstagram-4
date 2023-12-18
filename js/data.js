@@ -59,4 +59,26 @@ const effects = {
   }
 };
 
-export {postsCount, descriptions, commentsPerOne, messages, names, hashtagLength, hashtagsCount, descriptionLength, effects};
+const URL = 'https://29.javascript.pages.academy/kekstagram';
+
+const Route = {
+  GET_DATA: '/data',
+  SEND_DATA: '/',
+};
+
+const Method = {
+  GET: 'GET',
+  POST: 'POST',
+};
+
+const ErrorText = {
+  GET_DATA: 'Не удалось загрузить данные. Обновите страницу.',
+  POST_DATA: 'Не удалось отправить форму. Повторите попытку.',
+};
+
+const AlertShowTime = 5000;
+
+export { postsCount, commentsPerOne, descriptions, messages, names };
+export { hashtagLength, hashtagsCount, descriptionLength, effects };
+export { URL, Route, Method, ErrorText, AlertShowTime };
+
