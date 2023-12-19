@@ -1,5 +1,5 @@
 import { addUploadImageTagsValidators, addUploadImageDescriptionValidators } from './validators.js';
-import { effects } from './data.js';
+import { effects, FILE_TYPES } from './data.js';
 
 const uploadForm = document.querySelector('.img-upload__form');
 const uploadFormInput = uploadForm.querySelector('.img-upload__input');
@@ -174,12 +174,20 @@ const onUpdateSlider = () => {
 effectsElement.addEventListener('change', onChangeEffect);
 effectSlider.noUiSlider.on('update', onUpdateSlider);
 
+const isValidType = (file) => {
+  const fileName = file.name.toLowerCase();
+  return FILE_TYPES.some((it) => fileName.endsWith(it));
+};
+
 uploadFormInput.addEventListener('change', (event) => {
   const file = event.target.files[0];
 
-  if (file) {
+  if (file && isValidType(file)) {
     const imageUrl = URL.createObjectURL(file);
     imagePreview.src = imageUrl;
+    // effectsPreviews.forEach((preview) => {
+    //   preview.stye.backgroundImage = `url('${imagePreview.src}'`;
+    // });
   }
 });
 

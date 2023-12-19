@@ -78,7 +78,17 @@ const ErrorText = {
 
 const AlertShowTime = 5000;
 
+const PICTURES_COUNT = 10;
+
+const Filters = {
+  DEFAULT: 'filter-default',
+  RANDOM: 'filter-random',
+  DISCUSSED: 'filter-discussed',
+};
+
+const FILE_TYPES = ['jpg', 'jpeg', 'png'];
+
 export { postsCount, commentsPerOne, descriptions, messages, names };
 export { hashtagLength, hashtagsCount, descriptionLength, effects };
 export { URL, Route, Method, ErrorText, AlertShowTime };
-
+export { PICTURES_COUNT, Filters, FILE_TYPES };
