@@ -1,5 +1,5 @@
 import { addUploadImageTagsValidators, addUploadImageDescriptionValidators } from './validators.js';
-import { effects, FILE_TYPES } from './data.js';
+import { effects, FILE_TYPES, SubmitButtonText } from './data.js';
 
 const uploadForm = document.querySelector('.img-upload__form');
 const uploadFormInput = uploadForm.querySelector('.img-upload__input');
@@ -7,6 +7,7 @@ const uploadFormOverlay = uploadForm.querySelector('.img-upload__overlay');
 const exitButton = uploadForm.querySelector('.img-upload__cancel');
 const uploadButton = uploadForm.querySelector('.img-upload__submit');
 const imagePreview = uploadForm.querySelector('.img-upload__preview img');
+const effectsPreviews = document.querySelectorAll('.effects__preview');
 
 const hashtagsInput = uploadForm.querySelector('.text__hashtags');
 const desriptionInput = uploadForm.querySelector('.text__description');
@@ -19,11 +20,6 @@ const effectsElement = uploadForm.querySelector('.effects');
 const effectSliderWrapper = uploadForm.querySelector('.img-upload__effect-level');
 const effectSlider = uploadForm.querySelector('.effect-level__slider');
 const effectLevel = uploadForm.querySelector('.effect-level__value');
-
-// const SubmitButtonText = {
-//   IDLE: 'Опубликовать',
-//   SUBMITTING: 'Отправляю..',
-// };
 
 let effect = effects.NONE;
 
@@ -185,27 +181,27 @@ uploadFormInput.addEventListener('change', (event) => {
   if (file && isValidType(file)) {
     const imageUrl = URL.createObjectURL(file);
     imagePreview.src = imageUrl;
-    // effectsPreviews.forEach((preview) => {
-    //   preview.stye.backgroundImage = `url('${imagePreview.src}'`;
-    // });
+    effectsPreviews.forEach((preview) => {
+      preview.style.backgroundImage = `url('${imagePreview.src}'`;
+    });
   }
 });
 
-// const toggleSubmitButton = function (isDisabled) {
-//   uploadButton.disabled = isDisabled;
-//   uploadButton.textContent = isDisabled
-//     ? SubmitButtonText.SUBMITTING
-//     : SubmitButtonText.IDLE;
-// };
+const toggleSubmitButton = function (isDisabled) {
+  uploadButton.disabled = isDisabled;
+  uploadButton.textContent = isDisabled
+    ? SubmitButtonText.SUBMITTING
+    : SubmitButtonText.IDLE;
+};
 
 const setOnFormSubmit = (callback) => {
   uploadForm.addEventListener('submit', async (evt) => {
     evt.preventDefault();
 
     if (pristine.validate()) {
-      // toggleSubmitButton(true);
+      toggleSubmitButton(true);
       await callback(new FormData(uploadForm));
-      // toggleSubmitButton();
+      toggleSubmitButton();
     }
   });
 };
