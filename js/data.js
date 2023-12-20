@@ -88,7 +88,12 @@ const Filters = {
 
 const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 
+const SubmitButtonText = {
+  IDLE: 'Опубликовать',
+  SUBMITTING: 'Отправляю..',
+};
+
 export { postsCount, commentsPerOne, descriptions, messages, names };
 export { hashtagLength, hashtagsCount, descriptionLength, effects };
 export { URL, Route, Method, ErrorText, AlertShowTime };
-export { PICTURES_COUNT, Filters, FILE_TYPES };
+export { PICTURES_COUNT, Filters, FILE_TYPES, SubmitButtonText };
