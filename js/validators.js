@@ -1,31 +1,25 @@
-import { hashtagLength, hashtagsCount, descriptionLength } from './data.js';
+import { HASHTAG_LENGTH, HASHTAGS_COUNT, DESCRIPTION_LENGTH } from './data.js';
 
-function validateUploadImageTagsLength (value) {
+const validateUploadImageTagsLength = (value) => {
   const tags = value.trim().split(' ');
-  return tags.length <= hashtagsCount;
-}
+  return tags.length <= HASHTAGS_COUNT;
+};
 
-function validateUploadImageTagsUnique (value) {
+const validateUploadImageTagsUnique = (value) => {
   const tags = value.trim().split(' ');
-  const normilizedTags = new Set(tags.map((tag) => tag.toLowerCase()));
-  return normilizedTags.size === tags.length;
-}
+  const normalizedTags = new Set(tags.map((tag) => tag.toLowerCase()));
+  return normalizedTags.size === tags.length;
+};
 
-function validateUploadImageEveryTag (value) {
+const validateUploadImageEveryTag = (value) => {
   const tags = value.trim().split(' ');
   if(tags.length === 1 && tags[0] === '') {
     return true;
   }
-  return tags.every((tag) => /^#[a-zа-яёA-Z0-9]{1,19}$/i.test(tag) && tag.length <= hashtagLength);
-}
+  return tags.every((tag) => /^#[a-zа-яёA-Z0-9]{1,19}$/i.test(tag) && tag.length <= HASHTAG_LENGTH);
+};
 
-function validateUploadImageComment (value) {
-  if(value.length > descriptionLength) {
-    return false;
-  }
-
-  return true;
-}
+const validateUploadImageComment = (value) => value.length <= DESCRIPTION_LENGTH;
 
 const tagsValidators = [
   {
@@ -42,7 +36,7 @@ const tagsValidators = [
   }
 ];
 
-function addUploadImageTagsValidators (pristine, input) {
+const addUploadImageTagsValidators = (pristine, input) => {
   tagsValidators.map((tagValidator, index) => {
     pristine.addValidator(
       input,
@@ -52,9 +46,9 @@ function addUploadImageTagsValidators (pristine, input) {
       true
     );
   });
-}
+};
 
-function addUploadImageDescriptionValidators (pristine, input) {
+const addUploadImageDescriptionValidators = (pristine, input) => {
   pristine.addValidator(
     input,
     validateUploadImageComment,
@@ -62,7 +56,6 @@ function addUploadImageDescriptionValidators (pristine, input) {
     1,
     true
   );
-}
+};
 
 export {addUploadImageTagsValidators, addUploadImageDescriptionValidators};
-
