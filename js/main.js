@@ -1,19 +1,8 @@
 import { renderGallery } from './gallery.js';
-import { getData, sendData } from './api.js';
-import { setOnFormSubmit, closeUploadModal } from './form.js';
-import { showSuccessMessage, showErrorMessage } from './message.js';
+import { getData } from './api.js';
+import { setOnFormSubmit } from './form.js';
 import { showAlert, debounce } from './util.js';
 import { init as initFilter, getFilteredPictures } from './filter.js';
-
-setOnFormSubmit(async (data) => {
-  sendData(data).then(() => {
-    closeUploadModal();
-    showSuccessMessage();
-  }, () => {
-    closeUploadModal();
-    showErrorMessage();
-  });
-});
 
 getData().then((pictures) => {
   const debouncedRenderGallery = debounce(renderGallery);
@@ -22,3 +11,5 @@ getData().then((pictures) => {
 }, (error) => {
   showAlert(error.message);
 });
+
+setOnFormSubmit();

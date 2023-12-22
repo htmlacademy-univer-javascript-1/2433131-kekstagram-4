@@ -1,10 +1,10 @@
-import { showBigPicture } from './showBigPicture.js';
+import { showBigPicture } from './show-big-picture.js';
 
-const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
-const container = document.querySelector('.pictures');
+const pictureTemplateElement = document.querySelector('#picture').content.querySelector('.picture');
+const containerElement = document.querySelector('.pictures');
 
-const createPicture = function ({ url, description, comments, likes, id}) {
-  const picture = pictureTemplate.cloneNode(true);
+const createPicture = ({ url, description, comments, likes, id}) => {
+  const picture = pictureTemplateElement.cloneNode(true);
   picture.querySelector('.picture__img').src = url;
   picture.querySelector('.picture__img').alt = description;
   picture.querySelector('.picture__comments').textContent = comments.length;
@@ -14,8 +14,8 @@ const createPicture = function ({ url, description, comments, likes, id}) {
   return picture;
 };
 
-const renderPictures = function (pictures) {
-  container.querySelectorAll('.picture').forEach((element) => element.remove());
+const renderPictures = (pictures) => {
+  containerElement.querySelectorAll('.picture').forEach((element) => element.remove());
   const fragment = document.createDocumentFragment();
   pictures.forEach((pict) => {
     const picture = createPicture(pict);
@@ -25,11 +25,11 @@ const renderPictures = function (pictures) {
     });
     fragment.append(picture);
   });
-  container.append(fragment);
+  containerElement.append(fragment);
 };
 
-const renderGallery = function (pictures) {
-  renderPictures(pictures, container);
+const renderGallery = (pictures) => {
+  renderPictures(pictures, containerElement);
 };
 
 export { renderGallery };

@@ -1,4 +1,4 @@
-import { commentsPerOne } from './data.js';
+import { COMMENTS_PER_ONE } from './data.js';
 
 const bigPictureElement = document.querySelector('.big-picture');
 const commentCountElement = bigPictureElement.querySelector('.comments-count');
@@ -12,7 +12,7 @@ const commentsShownCountElement = bigPictureElement.querySelector('.comments-sho
 let commentsShown = 0;
 let comments = [];
 
-const createComment = function ({avatar, name, message}) {
+const createComment = ({avatar, name, message}) => {
   const comment = commentElement.cloneNode(true);
   comment.querySelector('.social__picture').src = avatar;
   comment.querySelector('.social__picture').alt = name;
@@ -20,8 +20,8 @@ const createComment = function ({avatar, name, message}) {
   return comment;
 };
 
-const renderComments = function () {
-  commentsShown += commentsPerOne;
+const renderComments = () => {
+  commentsShown += COMMENTS_PER_ONE;
   if (commentsShown >= comments.length) {
     commentsLoaderElement.classList.add('hidden');
     commentsShown = comments.length;
@@ -38,36 +38,36 @@ const renderComments = function () {
   commentCountElement.textContent = comments.length;
 };
 
-const hideBigPicture = function () {
+const hideBigPicture = () => {
   bigPictureElement.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
   commentsShown = 0;
 };
 
-function onDocumentKeydown(evt) {
+function onDocumentKeydown (evt) {
   if (evt.key === 'Escape') {
     evt.preventDefault();
     hideBigPicture();
   }
 }
 
-const onCancelButtonClick = function () {
+const onCancelButtonClick = () => {
   hideBigPicture();
 };
 
-const onCommentsLoaderClick = function () {
+const onCommentsLoaderClick = () => {
   renderComments();
 };
 
-const renderPictureDetails = function ({url, description, likes}) {
+const renderPictureDetails = ({url, description, likes}) => {
   bigPictureElement.querySelector('.big-picture__img img').src = url;
   bigPictureElement.querySelector('.big-picture__img img').alt = description;
   bigPictureElement.querySelector('.likes-count').textContent = likes;
   bigPictureElement.querySelector('.social__caption').textContent = description;
 };
 
-const showBigPicture = function (data) {
+const showBigPicture = (data) => {
   bigPictureElement.classList.remove('hidden');
   bodyElement.classList.add('modal-open');
   commentsLoaderElement.classList.add('hidden');

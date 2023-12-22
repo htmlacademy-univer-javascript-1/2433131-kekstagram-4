@@ -1,6 +1,7 @@
 import { PICTURES_COUNT, Filters } from './data.js';
 
 const filterElement = document.querySelector('.img-filters');
+
 let currentFilter = Filters.DEFAULT;
 let pictures = [];
 
