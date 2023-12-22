@@ -12,8 +12,8 @@ const load = async (route, errorText, method = Method.GET, body = null) => {
   }
 };
 
-const getData = () => load(Route.GET_DATA, ErrorText.GET_DATA);
+const getData = () => load(Route.GET_DATA, ErrorText.GET_IMAGES);
 
-const sendData = (body) => load(Route.SEND_DATA, ErrorText.POST_DATA, Method.POST, body);
+const sendData = (body) => load(Route.SEND_DATA, ErrorText.POST_NEW_IMAGE, Method.POST, body);
 
 export { getData, sendData };
